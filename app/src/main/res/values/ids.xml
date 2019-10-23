@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <item name="msg" type="id" />
+    <item name="counter" type="id" />
+    <item name="cview" type="id" />
+</resources>
