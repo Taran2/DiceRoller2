@@ -57,7 +57,6 @@ public class MainActivity extends AppCompatActivity {
     private Button validate;
     private Object numbertofind;
     private int counter = 0;
-    private TextView a;
     private TextView TN;
     private EditText Input_Num;
     private TextView G;
@@ -71,8 +70,7 @@ public class MainActivity extends AppCompatActivity {
         setContentView(R.layout.activity_main);
 
         G = (TextView) findViewById(R.id.msg);
-        Input_Num = (EditText) findViewById(R.id.numberEntered);
-        a = (TextView) findViewById(R.id.counter);
+
         TN = (TextView) findViewById(R.id.cview);
 
 
@@ -114,8 +112,8 @@ public class MainActivity extends AppCompatActivity {
 
     public void on_button_click(View view)
     {
+        Input_Num = (EditText) findViewById(R.id.numberEntered);
         TextView tv = this.findViewById(R.id.textView);
-
         Random r = new Random ();
         int number = r.nextInt(6);
 
@@ -123,14 +121,20 @@ public class MainActivity extends AppCompatActivity {
 
         int n = Integer.parseInt(Input_Num.getText ().toString());
 
+
             if (n < 1 || n > 6){
-                Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT);
-            } else if (n == number){
-                Toast.makeText(this, "Congratulations", Toast.LENGTH_SHORT);
+                Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
+            }
+            else if (n == number){
+
+                //Forgot to call .show() to display the toast
+                Toast.makeText(this, "Congratulations", Toast.LENGTH_SHORT).show();
 
                 counter = counter +1;
-
+                //The R.id of the view was not the same in the XML, I've changed the XML id to counterView
+                TextView a = (TextView) findViewById(R.id.counterView);
                 a.setText(Integer.toString(counter));
             }
     }
+
 }
