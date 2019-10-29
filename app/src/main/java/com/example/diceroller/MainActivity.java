@@ -1,6 +1,7 @@
 package com.example.diceroller;
 
 import android.app.Fragment;
+import android.content.Intent;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuItem;
@@ -15,6 +16,8 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.google.android.material.floatingactionbutton.FloatingActionButton;
 import com.google.android.material.snackbar.Snackbar;
 
+import java.util.ArrayList;
+import java.util.Arrays;
 import java.util.Random;
 
 
@@ -51,8 +54,7 @@ import android.widget.Toast;
 
 import java.util.Random;
 
-
-public class MainActivity extends AppCompatActivity {
+public class MainActivity<Question> extends AppCompatActivity {
 
     private Button validate;
     private Object numbertofind;
@@ -60,20 +62,19 @@ public class MainActivity extends AppCompatActivity {
     private TextView TN;
     private EditText Input_Num;
     private TextView G;
-
+    //String [] Questions = new String[6];
+    int number;
 
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        G = (TextView) findViewById(R.id.msg);
-
-        TN = (TextView) findViewById(R.id.cview);
-
-
+        G = findViewById(R.id.msg);
+        TN = findViewById(R.id.cview);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -86,6 +87,14 @@ public class MainActivity extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
+
+//        Questions [0] = "If you could go anywhere in the world, where would you go?";
+//        Questions [1] = "If you were stranded on a desert island, what three things would you want to take with you?";
+//        Questions [2] = "If you could eat only one food for the rest of your life, what would that be?";
+//        Questions [3] = "If you won a million dollars, what is the first thing you would buy?";
+//        Questions [4] = "If you could spaned the day with one fictional character, who would it be?";
+//        Questions [5] = "If you found a magic lantern and a genie gave you three wishes, what would you wish?";
+
     }
 
     @Override
@@ -110,31 +119,65 @@ public class MainActivity extends AppCompatActivity {
         return super.onOptionsItemSelected(item);
     }
 
-    public void on_button_click(View view)
-    {
-        Input_Num = (EditText) findViewById(R.id.numberEntered);
+
+    public int random_num_gen(){
+        Random r = new Random();
+        number = r.nextInt(6);
+        return number;
+    }
+
+    public void on_button_click(View view) {
+        Input_Num = findViewById(R.id.numberEntered);
         TextView tv = this.findViewById(R.id.textView);
-        Random r = new Random ();
-        int number = r.nextInt(6);
+
+        random_num_gen(); //calls method for generating random num
 
         tv.setText(Integer.toString(number));
 
-        int n = Integer.parseInt(Input_Num.getText ().toString());
+        int n = Integer.parseInt(Input_Num.getText().toString());
 
+        if (n < 1 || n > 6) {
+            Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
+        } else if (n == number) {
 
-            if (n < 1 || n > 6){
-                Toast.makeText(this, "Invalid Input", Toast.LENGTH_SHORT).show();
-            }
-            else if (n == number){
+            //Forgot to call .show() to display the toast
+            Toast.makeText(this, "Congratulations", Toast.LENGTH_SHORT).show();
 
-                //Forgot to call .show() to display the toast
-                Toast.makeText(this, "Congratulations", Toast.LENGTH_SHORT).show();
-
-                counter = counter +1;
-                //The R.id of the view was not the same in the XML, I've changed the XML id to counterView
-                TextView a = (TextView) findViewById(R.id.counterView);
-                a.setText(Integer.toString(counter));
-            }
+            counter = counter + 1;
+            //The R.id of the view was not the same in the XML, I've changed the XML id to counterView
+            TextView a = findViewById(R.id.counterView);
+            a.setText(Integer.toString(counter));
+        }
     }
 
+    public void d_icebreaker(View view)
+    {
+        TextView tv5 = this.findViewById(R.id.textView);
+
+        ArrayList<String> list = new ArrayList<String>(); //create new array that stores 6 sentences
+
+        list.add("If you could go anywhere in the world, where would you go?");
+        list.add("If you were stranded on a desert island, what three things would you want to take with you?");
+        list.add("If you could eat only one food for the rest of your life, what would that be?");
+        list.add("If you won a million dollars, what is the first thing you would buy?");
+        list.add("If you could spaned the day with one fictional character, who would it be?");
+        list.add("If you found a magic lantern and a genie gave you three wishes, what would you wish?");
+
+        tv5.setText(list.get(random_num_gen()));
+
+    }
+
+
 }
+
+
+
+
+
+
+
+
+
+
+
+
