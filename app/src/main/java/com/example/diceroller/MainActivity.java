@@ -62,16 +62,28 @@ public class MainActivity<Question> extends AppCompatActivity {
     private TextView TN;
     private EditText Input_Num;
     private TextView G;
-    //String [] Questions = new String[6];
     int number;
-
-
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
 
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+
+        Button nextPage = (Button) findViewById(R.id.button4);
+        nextPage.setOnClickListener(new View.OnClickListener() {
+
+            @Override
+            public void onClick(View view) {
+
+                Intent intent = new Intent (MainActivity.this, second_Screen.class);
+                startActivity(intent);
+
+            }
+
+        });{
+
+        }
 
         G = findViewById(R.id.msg);
         TN = findViewById(R.id.cview);
@@ -87,14 +99,6 @@ public class MainActivity<Question> extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-
-//        Questions [0] = "If you could go anywhere in the world, where would you go?";
-//        Questions [1] = "If you were stranded on a desert island, what three things would you want to take with you?";
-//        Questions [2] = "If you could eat only one food for the rest of your life, what would that be?";
-//        Questions [3] = "If you won a million dollars, what is the first thing you would buy?";
-//        Questions [4] = "If you could spaned the day with one fictional character, who would it be?";
-//        Questions [5] = "If you found a magic lantern and a genie gave you three wishes, what would you wish?";
-
     }
 
     @Override
@@ -118,7 +122,6 @@ public class MainActivity<Question> extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
-
 
     public int random_num_gen(){
         Random r = new Random();
@@ -150,24 +153,21 @@ public class MainActivity<Question> extends AppCompatActivity {
         }
     }
 
-    public void d_icebreaker(View view)
-    {
-        TextView tv5 = this.findViewById(R.id.textView);
+    public void d_icebreaker(View view) {
+        TextView F = this.findViewById(R.id.textView);
 
-        ArrayList<String> list = new ArrayList<String>(); //create new array that stores 6 sentences
+        ArrayList<String> Questions = new ArrayList<String>(); //create new array that stores 6 sentences
 
-        list.add("If you could go anywhere in the world, where would you go?");
-        list.add("If you were stranded on a desert island, what three things would you want to take with you?");
-        list.add("If you could eat only one food for the rest of your life, what would that be?");
-        list.add("If you won a million dollars, what is the first thing you would buy?");
-        list.add("If you could spaned the day with one fictional character, who would it be?");
-        list.add("If you found a magic lantern and a genie gave you three wishes, what would you wish?");
+        Questions.add("If you could go anywhere in the world, where would you go?");
+        Questions.add("If you were stranded on a desert island, what three things would you want to take with you?");
+        Questions.add("If you could eat only one food for the rest of your life, what would that be?");
+        Questions.add("If you won a million dollars, what is the first thing you would buy?");
+        Questions.add("If you could spaned the day with one fictional character, who would it be?");
+        Questions.add("If you found a magic lantern and a genie gave you three wishes, what would you wish?");
 
-        tv5.setText(list.get(random_num_gen()));
+        F.setText(Questions.get(random_num_gen()));
 
     }
-
-
 }
 
 
